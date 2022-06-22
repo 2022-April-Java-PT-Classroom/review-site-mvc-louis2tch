@@ -26,24 +26,26 @@ public class PopulateComponent implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 
-        User user1 = new User("Louis","./images/louis02.jpg");
-        User user2 = new User("Tom","./images/discours.jpg");
-        User user3 = new User("Antoine","./images/talk.jpg");
+        User user1 = new User("Louis","/images/louis02.jpg");
+        User user2 = new User("Tom","/images/discours.jpg");
+        User user3 = new User("Therese","/images/sure.jpg");
+        User user4 = new User("Antoine","/images/talk.jpg");
         userStorage.save(user1);
         userStorage.save(user2);
         userStorage.save(user3);
+        userStorage.save(user4);
 
         ReviewCategory category1 = new ReviewCategory("Science and Technology","Advances in " +
                 "science and technology can quickly become indispensable in our daily lives and to the nation as a whole. Policymakers need reliable, timely information on science and technology topics as rapid developments " +
                 "increase complexity and affect the economy, national security, and more.",
-                "./images/science.jpg","https://www.gao.gov/science-technology");
+                "/images/science.jpg","https://www.gao.gov/science-technology");
 
         ReviewCategory category2 = new ReviewCategory("Nature","The world " +
                 "is in the midst of a climate crisis that is made worse by a biodiversity crisis. " +
                 "Wild Nature Institute programs address these two crises at the same time through science," +
                 " education, and action. " +
                 "Protecting Wild Nature and  Biodiversity is our best defense against the climate crisis.",
-                "./images/science.jpg","https://www.wildnatureinstitute.org/");
+                "/images/nature.jpg","https://www.wildnatureinstitute.org/");
 
         ReviewCategory category3 = new ReviewCategory("Theatre","Ancient Greek theatre was " +
                 "a theatrical culture that flourished in ancient Greece from 700 BC. The city-state " +
@@ -51,7 +53,7 @@ public class PopulateComponent implements CommandLineRunner{
                 "this period, was its centre, where the theatre was institutionalised as part of a festival" +
                 " called the Dionysia, which honoured the god Dionysus. Tragedy (late 500 BC), comedy " +
                 "(490 BC), and the satyr play were the three dramatic genres to emerge there.",
-                "./images/theatre.jpg","https://en.wikipedia.org/wiki/Theatre_of_ancient_Greece");
+                "/images/theatre.jpg","https://en.wikipedia.org/wiki/Theatre_of_ancient_Greece");
 
         reviewCategoryStorage.save(category1);
         reviewCategoryStorage.save(category2);
@@ -69,7 +71,7 @@ public class PopulateComponent implements CommandLineRunner{
                 "Stokes equation is so hard to solve because it is non-linear. If the inertial " +
                 "terms were not present (either because of the geometry or because the inertial " +
                 "terms are negligible0, it would (and can) " +
-                "be much easier to solve ..","",user2, category1);
+                "be much easier to solve ...","",user2, category1);
 
         Review review4 = new Review("05/25/2022","My first impression at the Greek theater", "For me the tragedy's most " +
                 "important act is the sixth: " +

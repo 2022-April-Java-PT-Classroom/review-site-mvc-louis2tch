@@ -15,8 +15,8 @@ public class ReviewCategory {
     private String categoryContent;
     private String categoryImg;
     private String categoryLink;
-    @OneToMany//(mappedBy = "reviewCategory")
-    private Collection<Review> reviews;
+//    @OneToMany//(mappedBy = "reviewCategory")
+//    private Collection<Review> reviews;
 
     public ReviewCategory(String categoryName, String categoryContent, String categoryImg, String categoryLink) {
         this.categoryName = categoryName;
@@ -45,7 +45,13 @@ public class ReviewCategory {
         return categoryLink;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;

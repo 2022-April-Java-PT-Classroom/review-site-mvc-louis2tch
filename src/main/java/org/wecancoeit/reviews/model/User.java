@@ -11,8 +11,8 @@ public class User {
     private Long id;
     private String userNick;
     private String userAvatarUrl;
-    @OneToMany //(mappedBy = "user")
-    private Collection<Review> reviews;
+//    @OneToMany //(mappedBy = "user")
+//    private Collection<Review> reviews;
 
     public User(String userNick, String userAvatarUrl) {
         this.userNick = userNick;
@@ -20,6 +20,30 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserNick() {
+        return userNick;
+    }
+
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
+    }
+
+    public String getUserAvatarUrl() {
+        return userAvatarUrl;
+    }
+
+    public void setUserAvatarUrl(String userAvatarUrl) {
+        this.userAvatarUrl = userAvatarUrl;
     }
 
     @Override

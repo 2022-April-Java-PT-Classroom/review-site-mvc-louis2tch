@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+<!--    <script th:src="'/reviews.js'" th:inline="javascript"></script>-->
+    <title>REVIEWS</title>
+</head>
+<body>
+<header>
+    <nav class="center">
+        <ul>
+            <li><a href="/">Home</a></li>|
+            <li><a href="/reviews">Reviews</a></li>|
+            <li><a href="/users">Users</a></li>|
+            <li><a href="/categories">Categories</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.getElementById('review-add').style.display = none;
+    </script>
+
+    <h1 id="review-title" th:onclick="'showHideReviewAdd();'">Reviews</h1>
+    <div id="review-add">
+        <form action="/reviews/addReview" method="post">
+            <table >
+<!--                <tr>-->
+<!--                    <td>Date</td>-->
+<!--                    <td><input type="date" id="date"></td>-->
+<!--                </tr>-->
+                <tr>
+                    <td>Category</td>
+                    <td><select name="categoryId">
+                        <option th:each="category :${categories}" th:value="${category.id}"
+                                th:text="${category.categoryName}"></option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                    <td><select name="userId">
+                        <option th:each="user :${users}" th:value="${user.id}"
+                                th:text="${user.userNick}"></option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" name="title" placeholder="Title" class="form-width"></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><textarea name="description" placeholder="Description" class="form-width form-height"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td><textarea  name="content" placeholder="Content" class="form-width form-height"></textarea></td>
+                </tr>
+
+            </table>
+
+            <input type="submit" value="save">
+        </form>
+    </div>
+    <div class="y-separation"></div>
+</header>
+
+<main>
+    <div class="y-separation">
+        <div th:each="review :${reviews}">
+            <b><a th:href="'reviews/' + ${review.id}" th:text="${review.title}"></a></b>
+            <em> by [<a th:href="'/users/' +${review.users.id}" th:text="${review.users.userNick}"></a>]</em>
+            <a th:href="'/users/' +${review.users.id}">
+                <img th:src="${review.users.userAvatarUrl}"  class='avatar'>
+            </a>
+            <br>
+            <span th:text="${review.description}"></span><br>
+            <span th:text="${review.date}"></span> |
+            <a th:href="'/categories/' +${review.reviewCategories.id}" th:text="${review.reviewCategories.categoryName}"></a>
+            <p></p>
+        </div>
+
+    </div>
+    <!-- main -->
+    <script th:src="'/reviews.js'" ></script><!--th:inline="javascript"-->
+</main>
+
+<footer>
+    <p>©2022 Copyright WCCI - Design by  Louis II T.</p>
+</footer>
+</body>
+</html>

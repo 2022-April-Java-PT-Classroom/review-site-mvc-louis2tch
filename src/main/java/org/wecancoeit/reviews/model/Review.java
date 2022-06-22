@@ -1,9 +1,10 @@
 package org.wecancoeit.reviews.model;
 
+import javax.annotation.Resource;
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
+import org.wecancoeit.reviews.repo.ReviewCategoryRepository;
 
 @Entity
 public class Review {
@@ -32,6 +33,83 @@ public class Review {
     }
 
     public Review() {
+    }
+
+    HashMap<Long, ReviewCategory> category = new HashMap<>();
+    public ReviewCategory getOneCategory(Long Id) {
+        return category.get(Id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
+
+    public ReviewCategory getReviewCategories() {
+        return reviewCategories;
+    }
+
+
+
+//    public Optional<ReviewCategory> getOneCategory(Long Id) {
+//        ReviewCategoryRepository categoryRepo = null;
+//        return categoryRepo.findById(Id);
+//
+//    }
+
+
+//    public void addOneCategory(ReviewCategory catToAdd) {
+//        category.put(catToAdd.getId(), catToAdd);
+//    }
+//    public Collection<ReviewCategory> getAllCategories(){
+//        return category.values();
+//    }
+
+    public void setReviewCategories(ReviewCategory reviewCategories) {
+        this.reviewCategories = reviewCategories;
     }
 
     @Override

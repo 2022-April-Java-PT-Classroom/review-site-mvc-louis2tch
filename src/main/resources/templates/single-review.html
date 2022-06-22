@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>REVIEWS</title>
+</head>
+<body>
+<header>
+    <nav class="center">
+        <ul>
+            <li><a href="/">Home</a></li>|
+            <li><a href="/reviews">Reviews</a></li>|
+            <li><a href="/users">Users</a></li>|
+            <li><a href="/categories">Categories</a></li>
+        </ul>
+    </nav>
+
+    <div class="y-separation"></div>
+    <h1><u th:text="${review.title}">Title</u></h1>
+
+</header>
+
+<main>
+    <p th:text="${review.description}"></p>
+    <p th:text="${review.content}"></p>
+    <span th:text="${review.date}"></span> |
+    <a th:href="'/categories/' +${review.reviewCategories.id}" th:text="${review.reviewCategories.categoryName}"></a>
+
+    <!-- main -->
+</main>
+
+<footer>
+    <p>©2022 Copyright WCCI - Design by  Louis II T.</p>
+</footer>
+</body>
+</html>

@@ -11,7 +11,11 @@ import org.wecancoeit.reviews.repo.ReviewRepository;
 import org.wecancoeit.reviews.repo.UserRepository;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 @RequestMapping("reviews")
@@ -20,7 +24,7 @@ public class ReviewController {
     private ReviewRepository reviewRepo;
 
     @Resource
-    private ReviewCategoryRepository reviewCategoryRepo;
+    private ReviewCategoryRepository categoryRepo;
 
     @Resource
     private UserRepository userRepo;
@@ -28,33 +32,40 @@ public class ReviewController {
     @GetMapping("")
     public String allCategories(Model modelReview, Model modelCategory, Model modelUser){
         modelReview.addAttribute("reviews", reviewRepo.findAll());
-        modelCategory.addAttribute("categories", reviewCategoryRepo.findAll());
+        modelCategory.addAttribute("categories", categoryRepo.findAll());
         modelUser.addAttribute("users", userRepo.findAll());
         return "reviews";
     }
 
     @GetMapping("/{id}")
-    public String oneReview(Model modelReview, @PathVariable Long id){
+    public String oneReview(Model modelReview, Model modelCategory, Model modelUser, @PathVariable Long id){
         modelReview.addAttribute("review", reviewRepo.findById(id).get());
+        modelCategory.addAttribute("categories", categoryRepo.findAll());
+       // System.out.println();
         return "single-review";
     }
 
     @PostMapping("/addReview")
-    public String addUser(@RequestParam String date,
+    public String addUser(/*@RequestParam Date date,*/
                           @RequestParam String title,
                           @RequestParam String description,
                           @RequestParam String content,
                           @RequestParam String userId,
                           @RequestParam String categoryId){
+
+        Date d = Calendar.getInstance().getTime();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); //"MM/dd/yyyy hh:mm:ss"
+        String dateStr = df.format(d);
+
         Long userIdL = Long.parseLong(userId);
         User user = userRepo.findById(userIdL).get();
 //        ArrayList<User> user = new ArrayList<>();
 //        user.add(userRepo.findById(userIdL).get());
 
         Long categoryIdL = Long.parseLong(categoryId);
-        ReviewCategory category = reviewCategoryRepo.findById(categoryIdL).get();
+        ReviewCategory category = categoryRepo.findById(categoryIdL).get();
 
-        Review reviewToAdd = new Review(date, title, description, content, user, category);
+        Review reviewToAdd = new Review(dateStr, title, description, content, user, category);
         reviewRepo.save(reviewToAdd);
         return "redirect:/reviews";
     }
